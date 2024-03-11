@@ -5,6 +5,9 @@
 #include <string>
 using namespace std;
 
+// This class header file contains the inheritance hiearchy.
+
+
 const int MAX = 100;       // for temporary array of chars.
 const int TABLE_SIZE = 61; // prime number for hash table
 
@@ -67,45 +70,3 @@ private:
   float fee;
 };
 
-// HASH TABLE
-
-template <class TYPE> // the node class.
-class Node {
-public:
-  Node<TYPE>();
-  ~Node<TYPE>();
-  Node<TYPE>(const Node<TYPE> &src);
-  Node<TYPE> &operator=(const Node<TYPE> &src);
-
-  // functions for LLL collision operations
-  Node<TYPE> *&get_next();
-  void set_next(Node<TYPE> *src);
-
-  int display() const;
-
-private:
-  TYPE person;
-  Node<TYPE> *next;
-};
-
-template <class TYPE> // hash table ADT class
-class Table {
-public:
-  Table<TYPE>();
-  ~Table<TYPE>();
-  Table<TYPE>(const Table<TYPE> &src);
-  Table<TYPE> &operator=(const Table<TYPE> &src);
-
-  int display() const;
-  bool add(TYPE &src);
-  int hash(int src) const; // takes in a string to hash (aka, the ID number).
-  bool remove(TYPE &src);  // removing a member or provider
-  int dealloc(Node<TYPE> *&head); // for deallocating hash table
-
-private:
-  Node<TYPE> **table;
-  int table_size;
-};
-
-#include "node.tpp"
-#include "table.tpp"

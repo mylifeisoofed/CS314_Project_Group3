@@ -31,6 +31,25 @@ Table<TYPE> & Table<TYPE>::operator=(const Table<TYPE> & src)
 template <class TYPE>
 int Table<TYPE>::display() const
 {
+    for(int i = 0; i < TABLE_SIZE; ++i){
+      display(table[i]);
+    }
+
+    return 1;
+}
+
+template <class TYPE>
+int Table<TYPE>::display(Node<TYPE> * head) const
+{
+    Node<TYPE> * current = head;
+
+    while(current != nullptr)
+    {
+        current->display();
+        current = current->get_next();
+    }
+
+    return 1;
 }
 
 template <class TYPE>
@@ -42,9 +61,22 @@ bool Table<TYPE>::add(TYPE & src)
 
     int key = hash(ID);
 
-    cout << "Hash Key: " << key << endl;
+    // base case if the list was already empty at this index
+    if (table[key] == nullptr){ 
+      table[key] = new Node<TYPE>(src);
+      return true;
+    }
 
-    return true;
+    // case where it's already holding something.
+    else{
+      Node<TYPE>* temp = table[key];
+      table[key] = new Node<TYPE>(src);
+      table[key]->set_next(temp);
+      return true;
+    }
+
+    // otherwise, something weird has happened.
+    return false;
 }
 
 template <class TYPE>
@@ -56,8 +88,37 @@ int Table<TYPE>::hash(int src) const
 }
 
 template <class TYPE>
-bool Table<TYPE>::remove(TYPE & src)
-{}
+bool Table<TYPE>::remove(const string& id, const string& name)
+{
+  int key = 0;
+  try{
+    key = stoi(id);
+  }
+  catch(...){
+    return false;
+  }
+
+  key = hash(key);
+  
+  return remove(table[key], name);
+}
+
+template <class TYPE>
+bool Table<TYPE>::remove(Node<TYPE> *& head, const string& name)
+{
+  if (!head) // at the end
+    return false;
+
+  if (head->compare_name(name)) // found the person to delete
+  {
+    Node<TYPE> * temp = head->get_next();
+    delete head;
+    head = temp;
+    return true;
+  }
+
+  return remove(head->get_next(), name);
+}
 
 template <class TYPE>
 int Table<TYPE>::dealloc(Node<TYPE> *& head)
@@ -73,4 +134,35 @@ int Table<TYPE>::dealloc(Node<TYPE> *& head)
     if (head)
         delete head;
     return i;
+}
+
+template <class TYPE>
+bool Table<TYPE>::find(const string& id, const string& name)
+{
+  int key = 0;
+  try{
+    key = stoi(id);
+  }
+  catch(...){
+    return false;
+  }
+
+  key = hash(key);
+
+  return find(table[key], name);
+}
+
+template <class TYPE>
+bool Table<TYPE>::find(Node<TYPE>* head, const string& name)
+{
+  if (!head) // at the end
+    return false; // person not found.
+
+  if (head->compare_name(name)) // found the person
+  {
+    head->display(); // display their info
+    return true;
+  }
+
+  return find(head->get_next(), name);
 }

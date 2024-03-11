@@ -1,4 +1,4 @@
-#include "person_class.h"
+#include "class.h"
 
 Person::Person() {}
 
@@ -9,9 +9,6 @@ Person::Person(const string &name, const string &number, const string &address,
 
 Person::~Person() {}
 
-Person::Person(const Person &src) // copy constructor
-{}
-
 void Person::display() const {
   cout << "Name: " << name << endl;
   cout << "Address: " << address << endl;
@@ -20,14 +17,23 @@ void Person::display() const {
   cout << "ID Number: " << ID << endl;
 }
 
+bool Person::compare_name(const string &name) { return this->name == name; }
+
 int Person::get_key() const {
-  if (ID.size() > 0)
-    return stoi(ID);
-  else
+  try {
+    if (ID.size() > 0)
+      return stoi(ID);
+    else
+      return -1;
+  } catch (...) {
     return -1;
+  }
 }
 
-Member::Member() {}
+Member::Member() {
+  status = false;
+  comments = "";
+}
 
 Member::Member(const string &name, const string &number, const string &address,
                const string &state, const string &zipcode, const string &ID,
@@ -36,8 +42,6 @@ Member::Member(const string &name, const string &number, const string &address,
       comments(comments) {}
 
 Member::~Member() {}
-
-Member::Member(const Member &src) {}
 
 void Member::display() const {
   Person::display();
@@ -49,4 +53,7 @@ void Member::display() const {
     cout << "Suspended" << endl;
 
   cout << "Comments: " << comments << endl;
+  cout << "\n";
 }
+Provider ::Provider() { fee = 0; }
+Provider ::~Provider() {}

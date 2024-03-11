@@ -9,9 +9,9 @@ Node<TYPE>::~Node()
 }
 
 template <class TYPE>
-Node<TYPE>::Node(const Node<TYPE> & src)
+Node<TYPE>::Node(const TYPE & src)
 {
-    person = src.person;
+    person = src;
 }
 
 template <class TYPE>
@@ -35,7 +35,14 @@ void Node<TYPE>::set_next(Node<TYPE> * src)
 
 
 template <class TYPE>
-int Node<TYPE>::display() const
+bool Node<TYPE>::display() const
 {
-    // call the class's display function.
+  person.display();
+  return true;
+}
+
+template <class TYPE>
+bool Node<TYPE>::compare_name(const string& name)
+{
+  return person.compare_name(name);
 }
