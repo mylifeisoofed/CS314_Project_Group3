@@ -100,10 +100,11 @@ void check_in(Table<Member> &members, Table<Provider> &providers) {
   while (true) {
     cout << "Enter member ID: ";
     cin >> member_id;
+    cin.ignore(100, '\n');
     cout << endl;
 
     cout << "Enter member Name: ";
-    cin >> member_name;
+    getline(cin, member_name);
     cout << endl;
 
     if (members.find(member, member_id, member_name)) {
@@ -158,7 +159,7 @@ void check_in(Table<Member> &members, Table<Provider> &providers) {
 
     if (choice == 'Y' || choice == 'y') {
       cout << "Enter comments (up to 100 characters): ";
-      cin >> comments;
+      getline(cin, comments);
       cout << endl;
     } else if (choice == 'N' || choice == 'n') {
       break;

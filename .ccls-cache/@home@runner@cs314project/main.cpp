@@ -6,6 +6,9 @@ int main() {
   Table<Provider> ProvidersList;
   char choice[10];
 
+  MembersList.load_member(MEMBER_FILE);
+  ProvidersList.load_provider(PROVIDER_FILE);
+
   /* testing the classes and hash table
   Member my_member("John Doe", "503123456", "123 NE Geek St", "Oregon", "12345",
                    "517040", true, "PSU Student");
@@ -52,6 +55,9 @@ int main() {
       cout << "Invalid choice. Please try again.\n";
     }
   }
+
+  MembersList.save(MEMBER_FILE);
+  ProvidersList.save(PROVIDER_FILE);
 
   return 0;
 }
