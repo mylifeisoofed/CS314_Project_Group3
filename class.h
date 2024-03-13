@@ -1,6 +1,7 @@
 #include <cctype>
 #include <cstring>
 #include <fstream>
+#include <iomanip>
 #include <iostream>
 #include <string>
 using namespace std;
@@ -29,6 +30,7 @@ public:
   void display() const;
   int get_key() const;
   bool compare_name(const string &name);
+  bool save(const string &filename);
 
 protected:
   string name;
@@ -49,6 +51,8 @@ public:
   ~Member();
 
   void display() const;
+  bool save(const string &filename);
+  bool get_status();
 
 private:
   bool status;     // true = active, false = suspended
@@ -59,10 +63,13 @@ private:
 class Provider : public Person {
 public:
   Provider();
-  Provider(string service_code, float fee);
+  Provider(const string &name, const string &number, const string &address,
+           const string &state, const string &zipcode, const string &ID,
+           const float fee, const string &service_code);
   ~Provider();
 
   void display() const;
+  bool save(const string &filename);
 
 private:
   string service_code;

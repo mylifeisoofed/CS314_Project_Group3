@@ -1,5 +1,8 @@
 #include "class.h"
 
+#define MEMBER_FILE "list_of_members.txt"
+#define PROVIDER_FILE "list_of_providers.txt"
+
 // This header file contains the hash table data structure
 
 template <class TYPE> // the node class.
@@ -8,7 +11,7 @@ public:
   Node<TYPE>();
   ~Node<TYPE>();
   Node<TYPE>(const TYPE &src);
-  Node<TYPE> &operator=(const Node<TYPE> &src);
+  // Node<TYPE> &operator=(const Node<TYPE> &src);
 
   // functions for LLL collision operations
   Node<TYPE> *&get_next();
@@ -16,6 +19,9 @@ public:
 
   bool display() const;
   bool compare_name(const string &name);
+  bool save(const string &filename);
+  // bool load(const string &filename);
+  bool copy_person(TYPE &src);
 
 private:
   TYPE person;
@@ -35,15 +41,25 @@ public:
   int hash(int src) const; // takes in a string to hash (aka, the ID number).
   bool remove(const string &id,
               const string &name); // removing a member or provider
-  bool find(const string &id,
-            const string &name); // function to find a specific member.
+  bool lookup(const string &id,
+              const string &name); // function to lookup a specific member.
+
+  bool save(const string &filename); // function to save list of
+                                     // members/providers into a text file
+
+  bool find(TYPE &src, const string &ID, const string &name);
+  bool load_member(const string &filename);
+  bool load_provider(const string &filename);
 
 private:
   // wrapper functions for recursions
   bool remove(Node<TYPE> *&head, const string &id);
   int display(Node<TYPE> *head) const;
   int dealloc(Node<TYPE> *&head); // for deallocating hash table
-  bool find(Node<TYPE> *head, const string &id);
+  bool lookup(Node<TYPE> *head, const string &id);
+  bool save(Node<TYPE> *head, const string &filename);
+  bool find(Node<TYPE> *head, TYPE &src, const string &name);
+  // bool load(Node<TYPE> *head, const string &filename);
 
   Node<TYPE> **table;
   int table_size;

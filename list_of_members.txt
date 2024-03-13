@@ -1,0 +1,2 @@
+John Doe:503123456:123 NE Geek St:Oregon:12345:517040:1:PSU Student
+John Dane:503123456:123 NE Geek St:Oregon:12345:51432:1:OSU Student

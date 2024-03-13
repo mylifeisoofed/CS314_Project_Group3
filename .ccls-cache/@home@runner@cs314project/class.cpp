@@ -30,6 +30,21 @@ int Person::get_key() const {
   }
 }
 
+bool Person::save(const string &filename) {
+  ofstream file_out;
+
+  file_out.open(filename, ios::app);
+  if (file_out) {
+    file_out << name << ':' << number << ':' << address << ':' << state << ':'
+             << zipcode << ':' << ID << ':';
+    file_out.close();
+    return true;
+  }
+
+  file_out.close();
+  return false;
+}
+
 Member::Member() {
   status = false;
   comments = "";
@@ -55,5 +70,48 @@ void Member::display() const {
   cout << "Comments: " << comments << endl;
   cout << "\n";
 }
-Provider ::Provider() { fee = 0; }
-Provider ::~Provider() {}
+
+bool Member::save(const string &filename) {
+  ofstream file_out;
+
+  if (Person::save("list_of_members.txt") == false)
+    return false;
+
+  file_out.open("list_of_members.txt", ios::app);
+  if (file_out) {
+    file_out << status << ':' << comments << endl;
+    file_out.close();
+  }
+  return true;
+}
+
+bool Member::get_status() { return status; }
+
+Provider::Provider() : fee(0.0) {}
+Provider::~Provider() {}
+Provider::Provider(const string &name, const string &number,
+                   const string &address, const string &state,
+                   const string &zipcode, const string &ID, const float fee,
+                   const string &service_code)
+    : Person(name, number, address, state, zipcode, ID),
+      service_code(service_code), fee(fee) {}
+
+void Provider::display() const {
+  Person::display();
+  cout << "Service Code: " << service_code << endl;
+  cout << "Fee: $" << fixed << setprecision(2) << fee << endl;
+}
+
+bool Provider::save(const string &filename) {
+  ofstream file_out;
+
+  if (Person::save("list_of_providers.txt") == false)
+    return false;
+
+  file_out.open("list_of_providers.txt", ios::app);
+  if (file_out) {
+    file_out << service_code << ':' << fee << endl;
+    file_out.close();
+  }
+  return true;
+}
