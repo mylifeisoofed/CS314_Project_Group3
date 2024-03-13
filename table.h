@@ -1,3 +1,4 @@
+#pragma once
 #include "class.h"
 
 #define MEMBER_FILE "list_of_members.txt"

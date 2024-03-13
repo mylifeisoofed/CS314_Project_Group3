@@ -1,13 +1,12 @@
+#include "menu.h"
 #include "table.h"
-
-void provider_terminal();
-void manager_terminal();
 
 int main() {
   Table<Member> MembersList;
   Table<Provider> ProvidersList;
   char choice[10];
 
+  /* testing the classes and hash table
   Member my_member("John Doe", "503123456", "123 NE Geek St", "Oregon", "12345",
                    "517040", true, "PSU Student");
 
@@ -36,14 +35,14 @@ int main() {
   Table<Provider> providertest;
   providertest.load_provider(PROVIDER_FILE);
   providertest.display();
-
+  */
   // Display appropriate terminal
   while (true) {
     cout << "Are you a Provider or a Manager?: ";
     cin >> choice;
     cout << endl;
     if (strcasecmp(choice, "provider") == 0 || strcasecmp(choice, "p") == 0) {
-      // provider_terminal();
+      provider_terminal(MembersList, ProvidersList);
       break;
     } else if (strcasecmp(choice, "manager") == 0 ||
                strcasecmp(choice, "m") == 0) {

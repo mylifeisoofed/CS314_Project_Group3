@@ -1,9 +1,15 @@
+#pragma once
 #include <cctype>
 #include <cstring>
+#include <ctime>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
+#include <regex>
+#include <sstream>
 #include <string>
+#include <vector>
+
 using namespace std;
 
 // This class header file contains the inheritance hiearchy.

@@ -64,6 +64,7 @@ bool Table<TYPE>::add(TYPE & src)
     // base case if the list was already empty at this index
     if (table[key] == nullptr){ 
       table[key] = new Node<TYPE>(src);
+      table[key]->set_next(nullptr);
       return true;
     }
 
