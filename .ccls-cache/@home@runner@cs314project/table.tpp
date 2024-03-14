@@ -150,7 +150,7 @@ bool Table<TYPE>::lookup(const string& id, const string& name)
 
   key = hash(key);
 
-  return find(table[key], name);
+  return lookup(table[key], name);
 }
 
 template <class TYPE>
@@ -165,7 +165,7 @@ bool Table<TYPE>::lookup(Node<TYPE>* head, const string& name)
     return true;
   }
 
-  return find(head->get_next(), name);
+  return lookup(head->get_next(), name);
 }
 
 template <class TYPE>
@@ -235,6 +235,7 @@ bool Table<TYPE>::load_member(const string& filename)
   string number;
   string address;
   string state;
+  string city;
   string zipcode;
   string ID;
   bool status;
@@ -250,13 +251,14 @@ bool Table<TYPE>::load_member(const string& filename)
     getline(file_in, number, ':');
     getline(file_in, address, ':');
     getline(file_in, state, ':');
+    getline(file_in, city, ':');
     getline(file_in, zipcode, ':');
     getline(file_in, ID, ':');
     file_in >> status;
     file_in.ignore(100, ':');
     getline(file_in, comments, '\n');
 
-    Member member(name, number, address, state, zipcode, ID, status, comments);
+    Member member(name, number, address, state, city, zipcode, ID, status, comments);
     add(member);
 
     getline(file_in, name, ':');
@@ -273,6 +275,7 @@ bool Table<TYPE>::load_provider(const string& filename)
   string number;
   string address;
   string state;
+  string city;
   string zipcode;
   string ID;
   string service_code;
@@ -288,13 +291,14 @@ bool Table<TYPE>::load_provider(const string& filename)
     getline(file_in, number, ':');
     getline(file_in, address, ':');
     getline(file_in, state, ':');
+    getline(file_in, city, ':');
     getline(file_in, zipcode, ':');
     getline(file_in, ID, ':');
     getline(file_in, service_code, ':');
     file_in >> fee;
     file_in.ignore(100, '\n');
 
-    Provider provider(name, number, address, state, zipcode, ID, fee, service_code);
+    Provider provider(name, number, address, state, city, zipcode, ID, fee, service_code);
     add(provider);
 
     getline(file_in, name, ':');

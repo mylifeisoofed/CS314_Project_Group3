@@ -1,5 +1,4 @@
 598470|session with a dietitian|20
-883948|aerobics exercise session|15
 162528|Aerobics exercise session|33
 819675|Therapeutic counseling|37
 790691|Session with a dietitian|18

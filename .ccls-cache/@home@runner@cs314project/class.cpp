@@ -3,16 +3,19 @@
 Person::Person() {}
 
 Person::Person(const string &name, const string &number, const string &address,
-               const string &state, const string &zipcode, const string &ID)
-    : name(name), number(number), address(address), state(state),
+               const string &state, const string &city, const string &zipcode,
+               const string &ID)
+    : name(name), number(number), address(address), state(state), city(city),
       zipcode(zipcode), ID(ID) {}
 
 Person::~Person() {}
 
 void Person::display() const {
   cout << "Name: " << name << endl;
+  cout << "Phone Number: " << number << endl;
   cout << "Address: " << address << endl;
   cout << "State: " << state << endl;
+  cout << "City: " << city << endl;
   cout << "Zipcode: " << zipcode << endl;
   cout << "ID Number: " << ID << endl;
 }
@@ -36,7 +39,7 @@ bool Person::save(const string &filename) {
   file_out.open(filename, ios::app);
   if (file_out) {
     file_out << name << ':' << number << ':' << address << ':' << state << ':'
-             << zipcode << ':' << ID << ':';
+             << city << ':' << zipcode << ':' << ID << ':';
     file_out.close();
     return true;
   }
@@ -45,15 +48,23 @@ bool Person::save(const string &filename) {
   return false;
 }
 
+string Person::get_name() const { return name; }
+string Person::get_number() const { return number; }
+string Person::get_address() const { return address; }
+string Person::get_state() const { return state; }
+string Person::get_zip() const { return zipcode; }
+string Person::get_id() const { return ID; }
+string Person::get_city() const { return city; }
+
 Member::Member() {
   status = false;
   comments = "";
 }
 
 Member::Member(const string &name, const string &number, const string &address,
-               const string &state, const string &zipcode, const string &ID,
-               bool status, const string &comments)
-    : Person(name, number, address, state, zipcode, ID), status(status),
+               const string &state, const string &city, const string &zipcode,
+               const string &ID, bool status, const string &comments)
+    : Person(name, number, address, state, city, zipcode, ID), status(status),
       comments(comments) {}
 
 Member::~Member() {}
@@ -85,21 +96,29 @@ bool Member::save(const string &filename) {
   return true;
 }
 
-bool Member::get_status() { return status; }
+bool Member::get_status() const { return status; }
+/*
+string Member::get_address() { return address; }
+
+string Member::get_state() { return state; }
+
+string Member::get_zip() { return zipcode; }
+*/
 
 Provider::Provider() : fee(0.0) {}
 Provider::~Provider() {}
 Provider::Provider(const string &name, const string &number,
                    const string &address, const string &state,
-                   const string &zipcode, const string &ID, const float fee,
-                   const string &service_code)
-    : Person(name, number, address, state, zipcode, ID),
+                   const string &city, const string &zipcode, const string &ID,
+                   const float fee, const string &service_code)
+    : Person(name, number, address, state, city, zipcode, ID),
       service_code(service_code), fee(fee) {}
 
 void Provider::display() const {
   Person::display();
   cout << "Service Code: " << service_code << endl;
   cout << "Fee: $" << fixed << setprecision(2) << fee << endl;
+  cout << "\n";
 }
 
 bool Provider::save(const string &filename) {
@@ -115,3 +134,6 @@ bool Provider::save(const string &filename) {
   }
   return true;
 }
+
+float Provider::get_fee() const { return fee; }
+string Provider::get_service_code() const { return service_code; }
