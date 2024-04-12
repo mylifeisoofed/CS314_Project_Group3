@@ -14,8 +14,6 @@ Welcome to the ChocAn Data Processing Software repository! This software serves 
 
 The software is programmed entirely in C++. The software uses a custom-implemented template hash table to efficiently store and retrieve data about all members and providers in the database.  
 
-## Group Project
-
 This software was developed as a group project for **CS314: Elements of Software Engineering** at Portland State University Winter Term 2024.
 
 ## Contributors
