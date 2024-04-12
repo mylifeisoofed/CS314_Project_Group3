@@ -10,9 +10,9 @@ Welcome to the ChocAn Data Processing Software repository! This software serves 
 - **Report Summaries:** Generate summaries of appointments and reports as text files.
 - **Database Management:** Add and remove members and providers from the database.
 
-## Data Structure
+## Development
 
-- **Template Hash Table:** The software uses a custom-implemented template hash table to efficiently store and retrieve data about all members and providers in the database.  
+The software is programmed entirely in C++. The software uses a custom-implemented template hash table to efficiently store and retrieve data about all members and providers in the database.  
 
 ## Group Project
 
@@ -44,4 +44,15 @@ To get started with the software:
     ```
 
 3. Compile and run the program!
+
+## Usage
+
+There are two terminals provided by the software:
+
+- **Provider Terminal**: This terminal is for ChocAn providers to check in members and assign them to specific caregivers and providers. 
+- **Manager Terminal**: This terminal allows users to manage the ChocAn database by adding or removing members or providers. Accessing the Manager Terminal requires administrator credentials.
+
+### Administrator Credentials
+- The administrator credentials can be found in the file `admin_cred.txt`.
+- You can change the administrator credentials by editing the `admin_cred.txt` file.
 
