@@ -16,7 +16,7 @@ Welcome to the ChocAn Data Processing Software repository! This software serves 
 
 ## Group Project
 
-This software was developed as a group project for **CS314: Elements of Software Engineering**.
+This software was developed as a group project for **CS314: Elements of Software Engineering** at Portland State University Winter Term 2024.
 
 ## Contributors
 
